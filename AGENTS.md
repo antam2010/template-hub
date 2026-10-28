@@ -26,3 +26,7 @@
 For each implemented phase, run `pnpm typecheck` and `pnpm build`; fix regressions before proceeding. Run `pnpm test` for selectors/generator changes. For interactive changes, run relevant `pnpm test:e2e` scenarios. Run `pnpm build-storybook` for story changes. Re-run `pnpm test && pnpm verify:generated` after changing generated sources/config: all three templates with options on/off must install and build independently. Do not report a blocked or unexecuted check as passing.
 
 Use `pnpm install --frozen-lockfile` in CI. Do not commit generated output, browser traces, node_modules or .generated. Keep README and docs/IMPLEMENTATION.md accurate. Do not add a backend, database, authentication, or network-dependent demo data without scope agreement.
+
+## Template-first UX
+
+The primary flow is complete template selection → one-click composition → local save or portable project export. Keep detailed component tools collapsed. `templates/workspace/src/model.ts` is a DOM-free model shared by the standalone preview, composer and generator. Its 12 blueprints share one source-owned screen engine with explicit per-business fields/status/data. The generator must include the selected config, exact shared renderer/model/CSS and independently resolvable aliases. Never replace the selected screen with a lookalike. Save configurations locally, never imply backend data persistence. New composition changes must preserve the target blueprint/title/brand when reusing another template’s style.

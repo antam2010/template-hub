@@ -166,3 +166,5 @@ export async function generateProject(
   });
   return { bytes, files };
 }
+
+export { generateWorkspaceProject } from "./workspace";

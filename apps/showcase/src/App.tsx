@@ -57,6 +57,8 @@ import {
 } from "@hub/patterns";
 import ComponentDemo, { demoCode, type DemoProps } from "./ComponentDemo";
 import { CodeBlock } from "./CodeBlock";
+import { TemplatePicker } from "./TemplatePicker";
+import { TemplateComposer } from "./TemplateComposer";
 import { SetupGuide } from "./SetupGuide";
 import { DesignGallery, DesignStudio } from "./DesignStudio";
 import { GeneratorPage } from "./GeneratorPage";
@@ -71,11 +73,12 @@ const templateSources = import.meta.glob("../../../templates/*/src/App.tsx", {
 }) as Record<string, string>;
 const navigation = [
   {
-    label: "WORKSPACE",
+    label: "START HERE",
     items: [
-      ["/", "템플릿 갤러리", LayoutGrid],
-      ["/design", "디자인 둘러보기", Palette],
-      ["/design/saved", "저장한 디자인", Bookmark],
+      ["/", "템플릿 고르기", LayoutGrid],
+      ["/my-templates", "내 템플릿", Bookmark],
+      ["/setup", "개발 환경 · 설치", Terminal],
+      ["/docs", "사용 가이드", BookOpen],
     ],
   },
   {
@@ -101,10 +104,11 @@ const navigation = [
   {
     label: "TOOLS",
     items: [
+      ["/examples", "Cloudscape · 기술 샘플", LayoutGrid],
+      ["/design", "개별 디자인 탐색", Palette],
+      ["/design/saved", "저장한 개별 디자인", Bookmark],
       ["/playground", "플레이그라운드", SlidersHorizontal],
       ["/generator", "프로젝트 생성", PackagePlus],
-      ["/setup", "개발 환경 · 설치", Terminal],
-      ["/docs", "시작 가이드", BookOpen],
     ],
   },
 ] as const;
@@ -709,11 +713,13 @@ function Docs() {
         <Link to="/setup">처음이라면: 개발 환경과 설치 방법 보기</Link>
       </Button>
       <section className="panel stack">
-        <h2>템플릿을 내 프로젝트로</h2>
+        <h2>템플릿을 고르고, 눌러서 바꾸고, 가져가세요</h2>
         <p>
-          갤러리에서 동작을 확인한 후 프로젝트 생성기로 이동하세요.
-          템플릿·테마·실행 옵션을 선택하면 실제 소스가 포함된 독립 프로젝트를
-          내려받습니다.
+          첫 화면에서 완성형 업무 템플릿 12종 중 하나를 고르세요. 빠른 구성
+          6종이나 내가 저장한 구성을 눌러 적용하고, 메뉴 위치·표/카드·표시
+          영역을 클릭으로 바꿀 수 있습니다. ‘내 템플릿으로 저장’하면 다시 불러올
+          수 있고, ‘이 구성 가져가기’는 현재 구성이 적용된 실행 가능한 ZIP을
+          만듭니다.
         </p>
         <CodeBlock code={"pnpm install\npnpm dev\npnpm build"} />
         <small>
@@ -721,7 +727,7 @@ function Docs() {
           데이터를 사용합니다.
         </small>
         <Button asChild>
-          <Link to="/generator">프로젝트 생성기로 이동</Link>
+          <Link to="/">템플릿 고르러 가기</Link>
         </Button>
       </section>
       <section className="panel">
@@ -774,31 +780,38 @@ export default function App() {
           <span className="ml-auto text-muted">⌘</span>
         </div>
         <nav aria-label="메인 탐색" className="grouped-navigation">
-          {navigation.map((group) => (
-            <div className="navigation-group" key={group.label}>
-              <div className="nav-heading">{group.label}</div>
-              {group.items.map(([to, title, Icon]) => {
-                const active = to.includes("?")
-                  ? location.pathname + location.search === to
-                  : location.pathname === to &&
-                    (to !== "/components" || !location.search);
-                return (
+          <div className="navigation-group">
+            <div className="nav-heading">START HERE</div>
+            {navigation[0].items.map(([to, title, Icon]) => (
+              <Link
+                key={to}
+                to={to}
+                className={`nav-item ${location.pathname === to ? "active" : ""}`}
+                aria-current={location.pathname === to ? "page" : undefined}
+              >
+                <Icon size={17} />
+                {title}
+              </Link>
+            ))}
+          </div>
+          <details className="navigation-advanced">
+            <summary>컴포넌트·세부 디자인 더 보기 ▾</summary>
+            {navigation.slice(1).map((group) => (
+              <div className="navigation-group" key={group.label}>
+                <div className="nav-heading">{group.label}</div>
+                {group.items.map(([to, title, Icon]) => (
                   <Link
                     key={to}
                     to={to}
-                    aria-current={active ? "page" : undefined}
-                    className={`nav-item ${active ? "active" : ""}`}
+                    className={`nav-item ${location.pathname + location.search === to ? "active" : ""}`}
                   >
-                    <Icon size={17} />
+                    <Icon size={16} />
                     {title}
-                    {to === "/design" && (
-                      <span className="ml-auto nav-count">12</span>
-                    )}
                   </Link>
-                );
-              })}
-            </div>
-          ))}
+                ))}
+              </div>
+            ))}
+          </details>
         </nav>
         <div className="sidebar-note">
           <span className="badge mb-3">OPEN SOURCE READY</span>
@@ -808,8 +821,8 @@ export default function App() {
             <br />
             중요한 문제에 집중하세요.
           </p>
-          <Link to="/design">
-            디자인 선택하기 <ArrowUpRight size={13} />
+          <Link to="/">
+            템플릿부터 시작하기 <ArrowUpRight size={13} />
           </Link>
         </div>
         <div className="sidebar-foot">
@@ -840,7 +853,13 @@ export default function App() {
         </header>
         <main id="main-content" className="content" tabIndex={-1}>
           <Routes>
-            <Route path="/" element={<Gallery dark={dark} />} />
+            <Route path="/" element={<TemplatePicker />} />
+            <Route path="/my-templates" element={<TemplatePicker mine />} />
+            <Route
+              path="/compose/:id"
+              element={<TemplateComposer dark={dark} />}
+            />
+            <Route path="/examples" element={<Gallery dark={dark} />} />
             <Route
               path="/templates/:id"
               element={<TemplateDetail dark={dark} />}

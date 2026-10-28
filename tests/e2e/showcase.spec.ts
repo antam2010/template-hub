@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 test("gallery filters, detail responsive preview and theme persist", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/examples");
   await expect(page.locator(".template-card")).toHaveCount(3);
   await page.getByRole("textbox", { name: "템플릿 검색" }).fill("Cloudscape");
   await expect(page.locator(".template-card")).toHaveCount(1);
@@ -125,7 +125,7 @@ test("file upload displays selection and no layout overflow", async ({
     buffer: Buffer.from("demo"),
   });
   await expect(page.getByText("sample.txt", { exact: true })).toBeVisible();
-  await page.goto("/");
+  await page.goto("/examples");
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,

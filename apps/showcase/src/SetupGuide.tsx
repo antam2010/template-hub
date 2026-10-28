@@ -272,7 +272,7 @@ export function SetupGuide() {
                   "좌측 메뉴, 화면 경로와 전체 탐색 구조",
                 ],
                 [
-                  "templates/admin-cms/src/App.tsx",
+                  "templates/workspace/src/App.tsx",
                   "관리자 화면의 상태·목록·폼 처리. API 연결 시 먼저 확인",
                 ],
                 [

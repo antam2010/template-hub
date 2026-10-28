@@ -27,3 +27,9 @@ The component inspector shows edited usage snippets, full interactive demo code 
 ## Data and persistence
 
 CMS and Cloud Console mutate React state; Analytics derives deterministic period/channel data. No external API, analytics collector, identity provider or persistence layer is configured. Only the showcase theme and optional generated-project theme use localStorage. CSV output quotes fields and neutralizes formula prefixes. FileUpload reads names and validates size without uploading contents.
+
+## Template-first composition
+
+`TemplatePicker` is the default homepage with 12 business blueprints. `TemplateComposer` accepts a blueprint, applies six bundled appearance presets or another locally saved config, and sends validated config to an isolated `workspace.html` iframe. The pure model lives at `templates/workspace/src/model.ts`; the renderer supports table/card/board/files/settings/chart patterns with business-specific mock fields/statuses. `template-storage.ts` owns browser-local config identity. No mock business data is persisted.
+
+`generateWorkspaceProject` reuses the proven base project scaffolder, replaces its App with the exact selected config and shared workspace renderer, and includes model/CSS. It records template.config.json for review; runtime config is embedded in App.tsx. Original 3 templates remain available as technical examples. Vite watches and dependency scanning explicitly exclude generated fixture projects to prevent development reloads during isolated build checks.

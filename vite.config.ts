@@ -3,7 +3,19 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { resolve } from "node:path";
 export default defineConfig({
-  server: { allowedHosts: ["terminal.local"] },
+  server: {
+    allowedHosts: ["terminal.local"],
+    watch: { ignored: ["**/.generated/**"] },
+  },
+  optimizeDeps: {
+    entries: [
+      "index.html",
+      "workspace.html",
+      "cloud-console.html",
+      "admin-cms.html",
+      "analytics.html",
+    ],
+  },
   preview: { allowedHosts: ["terminal.local"] },
   plugins: [react(), tailwindcss()],
   resolve: {
@@ -19,6 +31,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         showcase: resolve("index.html"),
+        workspace: resolve("workspace.html"),
         cloud: resolve("cloud-console.html"),
         admin: resolve("admin-cms.html"),
         analytics: resolve("analytics.html"),
