@@ -1,0 +1,20 @@
+{
+  "name": "@hub/admin-cms",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p ../../tsconfig.json"
+  },
+  "dependencies": {
+    "@hub/ui-core": "workspace:*",
+    "@hub/patterns": "workspace:*",
+    "@hub/design-tokens": "workspace:*",
+    "lucide-react": "0.468.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

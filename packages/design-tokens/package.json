@@ -1,0 +1,13 @@
+{
+  "name": "@hub/design-tokens",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": "./src/index.css",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p ../../tsconfig.json"
+  },
+  "dependencies": {
+    "@fontsource-variable/noto-sans-kr": "5.3.1"
+  }
+}

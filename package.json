@@ -1,0 +1,55 @@
+{
+  "name": "template-hub",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "build": "pnpm typecheck && vite build",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "verify:generated": "node scripts/verify-generated.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@cloudscape-design/components": "3.0.1406",
+    "@cloudscape-design/global-styles": "1.0.71",
+    "@fontsource-variable/noto-sans-kr": "5.3.1",
+    "@radix-ui/react-checkbox": "1.4.1",
+    "@radix-ui/react-dialog": "1.3.1",
+    "@radix-ui/react-slot": "1.5.0",
+    "@radix-ui/react-tabs": "1.2.1",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "jszip": "3.10.1",
+    "lucide-react": "0.468.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-router-dom": "7.18.5",
+    "tailwind-merge": "3.7.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1",
+    "@storybook/addon-a11y": "10.6.5",
+    "@storybook/react-vite": "10.6.5",
+    "@tailwindcss/vite": "4.3.3",
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "5.2.0",
+    "prettier": "3.6.2",
+    "storybook": "10.6.5",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3",
+    "vite": "7.3.7",
+    "vitest": "3.2.7"
+  }
+}

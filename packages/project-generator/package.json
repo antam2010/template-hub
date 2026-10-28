@@ -1,0 +1,14 @@
+{
+  "name": "@hub/project-generator",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p ../../tsconfig.json"
+  },
+  "dependencies": {
+    "jszip": "3.10.1",
+    "@hub/patterns": "workspace:*"
+  }
+}

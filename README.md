@@ -21,7 +21,7 @@ pnpm typecheck          # 전체 TypeScript 검사
 pnpm build              # 네 개 HTML 진입점 프로덕션 빌드
 pnpm test               # Vitest: 필터·차트·안전한 ZIP 생성 검증
 pnpm exec playwright install chromium
-pnpm test:e2e           # 데스크톱/모바일 Chromium 브라우저 테스트
+pnpm test:e2e           # 프로덕션 빌드 후 데스크톱/모바일 Chromium 테스트
 pnpm storybook          # http://localhost:6006
 pnpm build-storybook    # storybook-static 생성
 pnpm verify:generated   # pnpm test 후 실행: 6개 생성 ZIP 설치/타입/빌드/테스트
@@ -32,19 +32,19 @@ Linux CI에서 브라우저 시스템 라이브러리가 없다면 `pnpm exec pl
 
 ## 주요 화면
 
-| 경로 | 기능 |
-| --- | --- |
-| `/` | 검색·카테고리 필터·썸네일·설명·기술 스택 |
-| `/templates/cloud-console` | Cloudscape 실제 화면, PC/태블릿/모바일 iframe, 소스 복사 |
-| `/templates/admin-cms` | 관리자 템플릿 상세·미리보기·소스 |
-| `/templates/analytics` | Analytics 상세·미리보기·소스 |
-| `/components` | 21개 컴포넌트 상호작용·Props·코드 |
-| `/playground` | 레이블/크기/variant/disabled/loading 편집과 실시간 예제 |
-| `/generator` | 이름·템플릿·테마/테스트 옵션 → 독립 프로젝트 ZIP |
-| `/docs` | 사용 가이드와 Mock 범위 |
-| `/cloud-console.html` | Cloudscape 리소스 생성·검색·정렬·선택·상태 전환·페이지 이동 |
-| `/admin-cms.html` | 콘텐츠 등록·수정·확인 후 삭제·검색·필터·페이지·CSV |
-| `/analytics.html` | 기간/채널 선택에 따른 KPI·차트·데이터 표·JSON 내보내기 |
+| 경로                       | 기능                                                        |
+| -------------------------- | ----------------------------------------------------------- |
+| `/`                        | 검색·카테고리 필터·썸네일·설명·기술 스택                    |
+| `/templates/cloud-console` | Cloudscape 실제 화면, PC/태블릿/모바일 iframe, 소스 복사    |
+| `/templates/admin-cms`     | 관리자 템플릿 상세·미리보기·소스                            |
+| `/templates/analytics`     | Analytics 상세·미리보기·소스                                |
+| `/components`              | 21개 컴포넌트 상호작용·Props·코드                           |
+| `/playground`              | 레이블/크기/variant/disabled/loading 편집과 실시간 예제     |
+| `/generator`               | 이름·템플릿·테마/테스트 옵션 → 독립 프로젝트 ZIP            |
+| `/docs`                    | 사용 가이드와 Mock 범위                                     |
+| `/cloud-console.html`      | Cloudscape 리소스 생성·검색·정렬·선택·상태 전환·페이지 이동 |
+| `/admin-cms.html`          | 콘텐츠 등록·수정·확인 후 삭제·검색·필터·페이지·CSV          |
+| `/analytics.html`          | 기간/채널 선택에 따른 KPI·차트·데이터 표·JSON 내보내기      |
 
 ## 구조
 

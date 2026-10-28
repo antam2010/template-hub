@@ -1,0 +1,19 @@
+{
+  "name": "@hub/showcase",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p ../../tsconfig.json"
+  },
+  "dependencies": {
+    "@hub/ui-core": "workspace:*",
+    "@hub/patterns": "workspace:*",
+    "@hub/design-tokens": "workspace:*",
+    "@hub/project-generator": "workspace:*",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-router-dom": "7.18.5",
+    "lucide-react": "0.468.0"
+  }
+}

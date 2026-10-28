@@ -1,0 +1,19 @@
+{
+  "name": "@hub/cloud-console",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p ../../tsconfig.json"
+  },
+  "dependencies": {
+    "@cloudscape-design/components": "3.0.1406",
+    "@cloudscape-design/global-styles": "1.0.71",
+    "@fontsource-variable/noto-sans-kr": "5.3.1"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

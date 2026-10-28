@@ -1,0 +1,18 @@
+packages:
+  - apps/*
+  - packages/*
+  - templates/*
+
+allowBuilds:
+  esbuild: true
+
+minimumReleaseAgeExclude:
+  - "@cloudscape-design/components@3.0.1406"
+  - "@storybook/addon-a11y@10.6.5"
+  - "@storybook/builder-vite@10.6.5"
+  - "@storybook/react-dom-shim@10.6.5"
+  - "@storybook/react-vite@10.6.5"
+  - "@storybook/react@10.6.5"
+  - react-router-dom@7.18.5
+  - react-router@7.18.5
+  - storybook@10.6.5

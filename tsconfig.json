@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "types": ["vite/client", "node"],
+    "baseUrl": ".",
+    "paths": {
+      "@hub/ui-core": ["packages/ui-core/src/index.tsx"],
+      "@hub/patterns": ["packages/patterns/src/index.ts"],
+      "@hub/project-generator": ["packages/project-generator/src/index.ts"]
+    }
+  },
+  "include": [
+    "apps",
+    "packages",
+    "templates",
+    "tests",
+    "vite.config.ts",
+    "playwright.config.ts",
+    ".storybook"
+  ]
+}
