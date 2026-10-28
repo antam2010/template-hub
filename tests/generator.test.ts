@@ -62,6 +62,12 @@ describe("portable project generation", () => {
           await zip.file(`${name}/package.json`)!.async("string"),
         );
         expect(pkg.scripts.build).toContain("vite build");
+        const readme = await zip.file(`${name}/README.md`)!.async("string");
+        expect(readme).toContain(pkg.dependencies.react);
+        expect(readme).toContain("실제 백엔드 연결");
+        expect(await zip.file(`${name}/.nvmrc`)!.async("string")).toBe(
+          "24.22.1\n",
+        );
         expect(JSON.stringify(pkg)).not.toContain("workspace:");
         expect(!!zip.file(`${name}/src/patterns.test.ts`)).toBe(options);
         expect(result.files["src/main.tsx"].includes("localStorage")).toBe(

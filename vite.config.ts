@@ -3,6 +3,8 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { resolve } from "node:path";
 export default defineConfig({
+  server: { allowedHosts: ["terminal.local"] },
+  preview: { allowedHosts: ["terminal.local"] },
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {

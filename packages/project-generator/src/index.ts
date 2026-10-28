@@ -152,7 +152,10 @@ export async function generateProject(
       .join(",")}}}});\n`;
   files["README.md"] =
     `# ${options.name}\n\nTemplate Hub의 ${options.template} 실제 구현 소스로 생성한 독립 프로젝트입니다.\n\n## 실행\n\nNode.js 22.12+ 및 pnpm 11.25.0을 설치하세요.\n\n\`\`\`bash\npnpm install\npnpm dev\npnpm build\n${options.includeTests ? "pnpm test\n" : ""}\`\`\`\n\nMock 데이터는 메모리에서 동작하며 새로고침하면 초기화됩니다. API, 인증, 서버 업로드는 포함되어 있지 않습니다.\n\n의존성은 정확한 버전으로 지정했습니다. 첫 설치에서 생성되는 pnpm-lock.yaml을 저장소에 커밋하세요.\n`;
-  files[".gitignore"] = "node_modules/\ndist/\n";
+  files["README.md"] +=
+    `\n## 기술 스택과 개발 환경\n\n- Node.js: 최소 22.12.0, 권장 24 LTS (검증 24.22.1)\n- pnpm: 11.25.0\n- React / React DOM: ${dependencies.react} / ${dependencies["react-dom"]}\n- TypeScript: ${devDependencies.typescript}\n- Vite: ${devDependencies.vite}\n- UI: ${cloud ? "Cloudscape " + dependencies["@cloudscape-design/components"] : "Tailwind CSS " + devDependencies.tailwindcss + ", 소스 관리형 UI와 Radix"}\n\n## 처음 실행하는 백엔드 개발자에게\n\n1. https://nodejs.org/en/download 에서 Node 24 LTS를 설치하고 새 터미널을 엽니다.\n2. npm install --global pnpm@11.25.0 을 실행합니다.\n3. 이 디렉터리에서 pnpm install, pnpm dev를 실행하고 출력된 Local 주소를 엽니다.\n4. Windows와 WSL 설치는 서로 별개이므로 한 환경에서 설치·실행하세요. PowerShell 실행 정책 오류는 pnpm.cmd 사용으로 해결할 수 있습니다.\n\n## 파일 역할\n\n- package.json: 의존성과 실행 스크립트 (pom.xml과 비슷한 역할)\n- src/App.tsx: 템플릿의 화면·상태·액션\n- src/patterns: Mock 데이터와 공통 함수\n- vite.config.ts / tsconfig.json: 빌드와 경로 별칭\n${cloud ? "- Cloudscape 글로벌 스타일은 이 독립 문서에서만 로드합니다.\n" : "- src/ui-core: 공통 컴포넌트 소스\n- src/styles.css: 디자인 토큰과 Tailwind 4 설정\n"}\n## 실제 백엔드 연결\n\n현재는 메모리 Mock이며 서버 요청을 하지 않습니다. API 계약을 정한 후 src/App.tsx의 조회/저장/수정/삭제를 fetch와 서버 DTO에 맞게 교체하세요. 로컬 개발은 Vite server.proxy로 /api를 백엔드에 전달할 수 있습니다. 운영 환경은 Nginx/API gateway 또는 별도 API 도메인과 CORS 설정이 필요합니다. 인증은 쿠키/토큰 방식과 CSRF 정책을 서버와 함께 정하세요.\n\n.env.local의 VITE_ 접두사 값은 브라우저에 노출됩니다. DB 비밀번호나 비밀키는 넣지 마세요. 환경변수 변경 후 개발 서버를 재시작하세요. Vite proxy는 개발용이며 배포에 자동 반영되지 않습니다.\n\n## 빌드와 배포\n\npnpm build가 만든 dist 전체를 정적 호스팅하세요. pnpm exec vite preview는 빌드 확인용입니다. React Router를 추가했다면 SPA 경로를 index.html로 돌려주는 설정이 필요합니다.\n`;
+  files[".nvmrc"] = "24.22.1\n";
+  files[".gitignore"] = "node_modules/\ndist/\n.env.local\n.env.*.local\n";
   files["pnpm-workspace.yaml"] =
     "packages: []\nallowBuilds:\n  esbuild: true\n";
   for (const [path, source] of Object.entries(files))

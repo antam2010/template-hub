@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, Routes, Route, useParams } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Routes,
+  Route,
+  useParams,
+  useSearchParams,
+  useLocation,
+} from "react-router-dom";
 import {
   Boxes,
   LayoutGrid,
@@ -20,6 +28,16 @@ import {
   Code2,
   Layers,
   X,
+  Palette,
+  Bookmark,
+  MousePointer2,
+  RectangleHorizontal,
+  TextCursorInput,
+  Table2,
+  PanelLeft,
+  Bell,
+  ChartNoAxesCombined,
+  Terminal,
 } from "lucide-react";
 import {
   Button,
@@ -38,6 +56,9 @@ import {
   type ComponentName,
 } from "@hub/patterns";
 import ComponentDemo, { demoCode, type DemoProps } from "./ComponentDemo";
+import { CodeBlock } from "./CodeBlock";
+import { SetupGuide } from "./SetupGuide";
+import { DesignGallery, DesignStudio } from "./DesignStudio";
 import { GeneratorPage } from "./GeneratorPage";
 import demoSource from "./ComponentDemo.tsx?raw";
 import coreSource from "../../../packages/ui-core/src/index.tsx?raw";
@@ -48,44 +69,68 @@ const templateSources = import.meta.glob("../../../templates/*/src/App.tsx", {
   import: "default",
   eager: true,
 }) as Record<string, string>;
-const nav = [
-  ["/", "템플릿 갤러리", LayoutGrid],
-  ["/components", "컴포넌트 라이브러리", Component],
-  ["/playground", "플레이그라운드", SlidersHorizontal],
-  ["/generator", "프로젝트 생성", PackagePlus],
-  ["/docs", "시작 가이드", BookOpen],
+const navigation = [
+  {
+    label: "WORKSPACE",
+    items: [
+      ["/", "템플릿 갤러리", LayoutGrid],
+      ["/design", "디자인 둘러보기", Palette],
+      ["/design/saved", "저장한 디자인", Bookmark],
+    ],
+  },
+  {
+    label: "DESIGN STUDIO",
+    items: [
+      ["/design/buttons", "버튼 디자인", MousePointer2],
+      ["/design/cards", "카드 디자인", RectangleHorizontal],
+      ["/design/inputs", "입력 필드 디자인", TextCursorInput],
+    ],
+  },
+  {
+    label: "COMPONENTS",
+    items: [
+      ["/components", "전체 컴포넌트", Component],
+      ["/components?group=actions", "버튼 · 액션", MousePointer2],
+      ["/components?group=forms", "입력 · 폼", TextCursorInput],
+      ["/components?group=data", "테이블 · 데이터", Table2],
+      ["/components?group=navigation", "탐색 · 레이아웃", PanelLeft],
+      ["/components?group=feedback", "알림 · 상태", Bell],
+      ["/components?group=display", "카드 · 차트", ChartNoAxesCombined],
+    ],
+  },
+  {
+    label: "TOOLS",
+    items: [
+      ["/playground", "플레이그라운드", SlidersHorizontal],
+      ["/generator", "프로젝트 생성", PackagePlus],
+      ["/setup", "개발 환경 · 설치", Terminal],
+      ["/docs", "시작 가이드", BookOpen],
+    ],
+  },
 ] as const;
-export function CodeBlock({ code }: { code: string }) {
-  const [copied, setCopied] = useState(false);
-  const [error, setError] = useState("");
-  return (
-    <div className="code-block">
-      <div className="row spread">
-        <span>TSX / TypeScript</span>
-        <button
-          aria-label="코드 복사"
-          className="row"
-          onClick={async () => {
-            try {
-              await navigator.clipboard.writeText(code);
-              setCopied(true);
-              setTimeout(() => setCopied(false), 2000);
-            } catch {
-              setError("복사할 수 없습니다. 코드를 직접 선택해 주세요.");
-            }
-          }}
-        >
-          {copied ? <Check size={14} /> : <Copy size={14} />}{" "}
-          {copied ? "복사됨" : "복사"}
-        </button>
-      </div>
-      <pre tabIndex={0}>
-        <code>{code}</code>
-      </pre>
-      {error && <p role="alert">{error}</p>}
-    </div>
-  );
-}
+const componentGroups: Record<
+  string,
+  { label: string; items: readonly ComponentName[] }
+> = {
+  actions: { label: "버튼 · 액션", items: ["Button", "Modal"] },
+  forms: {
+    label: "입력 · 폼",
+    items: ["Input", "Select", "Checkbox", "Form", "FileUpload"],
+  },
+  data: {
+    label: "테이블 · 데이터",
+    items: ["Table", "Pagination", "Filter", "Search"],
+  },
+  navigation: {
+    label: "탐색 · 레이아웃",
+    items: ["Sidebar", "Navbar", "Tabs", "Breadcrumb"],
+  },
+  feedback: {
+    label: "알림 · 상태",
+    items: ["Toast", "Alert", "Badge", "Loading"],
+  },
+  display: { label: "카드 · 차트", items: ["Card", "Chart"] },
+};
 function Thumbnail({ id }: { id: TemplateId }) {
   return (
     <div className={`thumbnail thumb-${id}`} aria-hidden="true">
@@ -235,9 +280,9 @@ function Gallery({ dark }: { dark: boolean }) {
           </p>
         </div>
         <Button asChild className="mb-2">
-          <Link to="/generator">
-            <PackagePlus size={16} />
-            프로젝트 생성
+          <Link to="/design">
+            <Palette size={16} />
+            디자인 둘러보기
             <ArrowRight size={15} />
           </Link>
         </Button>
@@ -471,7 +516,14 @@ const initialProps: Omit<DemoProps, "name"> = {
   loading: false,
 };
 function ComponentLibrary({ playground = false }: { playground?: boolean }) {
-  const [name, setName] = useState<ComponentName>("Button");
+  const [params] = useSearchParams();
+  const group = componentGroups[params.get("group") ?? ""];
+  const names = group?.items ?? componentNames;
+  const [name, setName] = useState<ComponentName>(names[0]);
+  useEffect(() => {
+    setName(names[0]);
+    setQ("");
+  }, [params.toString()]);
   const [q, setQ] = useState("");
   const [props, setProps] = useState(initialProps);
   const config = { name, ...props };
@@ -490,7 +542,9 @@ function ComponentLibrary({ playground = false }: { playground?: boolean }) {
     <div className="stack">
       <div className="eyebrow">BUILD WITH CONFIDENCE</div>
       <h1 className="page-title mb-0">
-        {playground ? "플레이그라운드" : "컴포넌트 라이브러리"}
+        {playground
+          ? "플레이그라운드"
+          : (group?.label ?? "컴포넌트 라이브러리")}
       </h1>
       <p className="muted">
         실제 상호작용을 확인하고, 코드를 프로젝트에 가져가세요.
@@ -504,7 +558,7 @@ function ComponentLibrary({ playground = false }: { playground?: boolean }) {
             onChange={(e) => setQ(e.target.value)}
           />
           <nav aria-label="컴포넌트 목록" className="component-list">
-            {componentNames
+            {names
               .filter((n) => n.toLowerCase().includes(q.toLowerCase()))
               .map((n) => (
                 <button
@@ -651,6 +705,9 @@ function Docs() {
     <div className="stack max-w-3xl">
       <div className="eyebrow">DEVELOPER GUIDE</div>
       <h1 className="page-title">시작 가이드</h1>
+      <Button asChild variant="outline">
+        <Link to="/setup">처음이라면: 개발 환경과 설치 방법 보기</Link>
+      </Button>
       <section className="panel stack">
         <h2>템플릿을 내 프로젝트로</h2>
         <p>
@@ -687,6 +744,7 @@ function Docs() {
   );
 }
 export default function App() {
+  const location = useLocation();
   const [dark, setDark] = useState(
     () => localStorage.getItem("hub-theme") === "dark",
   );
@@ -715,21 +773,31 @@ export default function App() {
           </div>
           <span className="ml-auto text-muted">⌘</span>
         </div>
-        <div className="nav-heading">WORKSPACE</div>
-        <nav aria-label="메인 탐색">
-          {nav.map(([to, title, Icon]) => (
-            <NavLink
-              key={to}
-              to={to}
-              end={to === "/"}
-              className={({ isActive }) =>
-                `nav-item ${isActive ? "active" : ""}`
-              }
-            >
-              <Icon size={18} />
-              {title}
-              {to === "/" && <span className="ml-auto nav-count">3</span>}
-            </NavLink>
+        <nav aria-label="메인 탐색" className="grouped-navigation">
+          {navigation.map((group) => (
+            <div className="navigation-group" key={group.label}>
+              <div className="nav-heading">{group.label}</div>
+              {group.items.map(([to, title, Icon]) => {
+                const active = to.includes("?")
+                  ? location.pathname + location.search === to
+                  : location.pathname === to &&
+                    (to !== "/components" || !location.search);
+                return (
+                  <Link
+                    key={to}
+                    to={to}
+                    aria-current={active ? "page" : undefined}
+                    className={`nav-item ${active ? "active" : ""}`}
+                  >
+                    <Icon size={17} />
+                    {title}
+                    {to === "/design" && (
+                      <span className="ml-auto nav-count">12</span>
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
           ))}
         </nav>
         <div className="sidebar-note">
@@ -740,8 +808,8 @@ export default function App() {
             <br />
             중요한 문제에 집중하세요.
           </p>
-          <Link to="/docs">
-            시작 가이드 읽기 <ArrowUpRight size={13} />
+          <Link to="/design">
+            디자인 선택하기 <ArrowUpRight size={13} />
           </Link>
         </div>
         <div className="sidebar-foot">
@@ -777,12 +845,16 @@ export default function App() {
               path="/templates/:id"
               element={<TemplateDetail dark={dark} />}
             />
+            <Route path="/design" element={<DesignGallery />} />
+            <Route path="/design/saved" element={<DesignGallery savedOnly />} />
+            <Route path="/design/:kind" element={<DesignStudio />} />
             <Route path="/components" element={<ComponentLibrary />} />
             <Route
               path="/playground"
               element={<ComponentLibrary playground />}
             />
             <Route path="/generator" element={<GeneratorPage />} />
+            <Route path="/setup" element={<SetupGuide />} />
             <Route path="/docs" element={<Docs />} />
             <Route
               path="*"
