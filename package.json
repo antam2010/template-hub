@@ -8,16 +8,19 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "vite --host 0.0.0.0",
+    "dev": "pnpm build:kit && vite --host 0.0.0.0",
     "typecheck": "tsc --noEmit",
-    "build": "pnpm typecheck && vite build",
+    "build": "pnpm typecheck && pnpm build:kit && vite build",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "verify:generated": "node scripts/verify-generated.mjs",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "build:kit": "node scripts/build-kit.mjs",
+    "check:ui": "node scripts/check-ui-policy.mjs --project examples/company-members",
+    "verify:consumer": "node scripts/verify-consumer.mjs"
   },
   "dependencies": {
     "@cloudscape-design/components": "3.0.1406",

@@ -30,3 +30,9 @@ Use `pnpm install --frozen-lockfile` in CI. Do not commit generated output, brow
 ## Template-first UX
 
 The primary flow is complete template selection → one-click composition → local save or portable project export. Keep detailed component tools collapsed. `templates/workspace/src/model.ts` is a DOM-free model shared by the standalone preview, composer and generator. Its 12 blueprints share one source-owned screen engine with explicit per-business fields/status/data. The generator must include the selected config, exact shared renderer/model/CSS and independently resolvable aliases. Never replace the selected screen with a lookalike. Save configurations locally, never imply backend data persistence. New composition changes must preserve the target blueprint/title/brand when reusing another template’s style.
+
+## Company package composition
+
+`packages/screen-patterns` owns React screen compositions and depends on ui-core. The existing DOM-free `packages/patterns` remains unchanged. `registry/components.json` is the machine-readable catalog shared with `/company-kit`. References are not company-approved until company review. Never claim all legacy templates enforce the policy.
+
+`examples/company-members` is the strict consumer reference. Read its AGENTS.md and ui-policy.json before editing it. Business screens use named imports from ui-core/screen-patterns; no custom controls, CSS or third-party UI. Run `pnpm check:ui`, `pnpm test`, `pnpm build`, and `pnpm verify:consumer` when the kit changes. The last check extracts the distributed ZIP and installs actual compiled tarballs with no repository aliases. Do not publish packages to a registry without an explicit request. AST rules are review aids, not a security sandbox. Protect policy/package changes in code review.

@@ -1,0 +1,27 @@
+{
+  "name": "@hub/screen-patterns",
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "@hub/ui-core": "workspace:^"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "access": "restricted"
+  }
+}

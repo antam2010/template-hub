@@ -1,0 +1,5 @@
+packages: []
+allowBuilds:
+  esbuild: true
+overrides:
+  "@hub/ui-core": "file:vendor/hub-ui-core-0.1.0.tgz"

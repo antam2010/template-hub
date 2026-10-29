@@ -99,3 +99,17 @@ pnpm test # 테스트 옵션을 선택한 경우
 빠른 구성은 색상·메뉴·밀도·카드/표·블록 기본값을 한 번에 바꿉니다. 내 템플릿의 구성을 다른 업무 템플릿에 적용해도 대상 화면의 제목·업무 데이터는 유지합니다. 세부 입력은 접힌 설정 안에 두었습니다. 저장은 현재 브라우저 로컬이며 서버 동기화와 업무 데이터 저장은 제공하지 않습니다.
 
 ‘이 구성 가져가기’ ZIP은 현재 TemplateConfig, src/Workspace.tsx, src/model.ts, CSS와 필요한 UI 소스를 포함합니다. `template.config.json`은 구성 기록용이고 실행은 src/App.tsx의 config를 사용합니다. 기존 생성기는 원본 기술 샘플 3종을 위한 고급 도구로 남아 있습니다.
+
+## 회사 표준 UI로 AI 개발하기
+
+`/company-kit`에서 공통 컴포넌트 명세, 실제 회원 관리 조합, 독립 설치 프로젝트 ZIP을 확인합니다. `pnpm build:kit`은 ui-core와 screen-patterns를 JS·타입 선언·CSS가 포함된 0.1.0 패키지로 빌드하고, 이 패키지를 설치하는 독립 예제를 `public/distribution/company-members.zip`으로 생성합니다. 사내 npm 저장소로는 아직 게시하지 않았습니다.
+
+```sh
+pnpm check:ui
+pnpm build
+pnpm verify:consumer
+```
+
+AI는 배포 ZIP의 AGENTS.md와 registry/components.json을 먼저 읽고 `ListPage`·`FormDialog`를 조합합니다. 회원 검색·필터·페이지 이동·등록·수정은 Mock으로 작동합니다. 공통 UI를 새로 만들거나 스타일을 덮어쓰는 일반적인 우회는 TypeScript AST 검사에서 실패합니다. CI에서 정책 검사, 패키지 빌드, 독립 소비자 설치·빌드를 실행합니다. 정책은 보안 경계가 아니며 정책 파일 변경과 예외는 코드 리뷰가 필요합니다.
+
+현재 강제 대상은 회원 관리 참조 예제입니다. 기존 12종 업무 템플릿 전체의 공통 패턴 전환, 회사 디자인 승인, API 연동, 사내 패키지 저장소·배포 권한·버전 업데이트 운영은 후속 작업입니다. CSS는 전역 reset을 포함하므로 Cloudscape와 같은 문서에 혼합하지 않습니다. 기존 서비스 이식은 별도 앱 루트 또는 iframe 검증 후 진행합니다.

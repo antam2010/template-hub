@@ -16,7 +16,8 @@
     "paths": {
       "@hub/ui-core": ["packages/ui-core/src/index.tsx"],
       "@hub/patterns": ["packages/patterns/src/index.ts"],
-      "@hub/project-generator": ["packages/project-generator/src/index.ts"]
+      "@hub/project-generator": ["packages/project-generator/src/index.ts"],
+      "@hub/screen-patterns": ["packages/screen-patterns/src/index.tsx"]
     }
   },
   "include": [
@@ -26,6 +27,7 @@
     "tests",
     "vite.config.ts",
     "playwright.config.ts",
-    ".storybook"
+    ".storybook",
+    "examples/company-members/src"
   ]
 }

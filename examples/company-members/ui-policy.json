@@ -1,0 +1,49 @@
+{
+  "sourceRoots": ["src"],
+  "allowedImports": [
+    "react",
+    "react-dom/client",
+    "react/jsx-runtime",
+    "@hub/ui-core",
+    "@hub/ui-core/styles.css",
+    "@hub/screen-patterns"
+  ],
+  "allowedUiExports": {
+    "@hub/ui-core": [
+      "Button",
+      "Input",
+      "Select",
+      "Checkbox",
+      "Badge",
+      "Alert",
+      "Loading",
+      "Card",
+      "Modal",
+      "Table",
+      "Pagination",
+      "Toast",
+      "Column"
+    ],
+    "@hub/screen-patterns": ["ListPage", "FormDialog"]
+  },
+  "allowedHtml": [
+    "div",
+    "section",
+    "main",
+    "header",
+    "footer",
+    "nav",
+    "aside",
+    "h1",
+    "h2",
+    "h3",
+    "p",
+    "span",
+    "label",
+    "small",
+    "strong",
+    "ul",
+    "li"
+  ],
+  "registry": "registry/components.json"
+}

@@ -59,6 +59,7 @@ import ComponentDemo, { demoCode, type DemoProps } from "./ComponentDemo";
 import { CodeBlock } from "./CodeBlock";
 import { TemplatePicker } from "./TemplatePicker";
 import { TemplateComposer } from "./TemplateComposer";
+import { CompanyKit } from "./CompanyKit";
 import { SetupGuide } from "./SetupGuide";
 import { DesignGallery, DesignStudio } from "./DesignStudio";
 import { GeneratorPage } from "./GeneratorPage";
@@ -76,6 +77,7 @@ const navigation = [
     label: "START HERE",
     items: [
       ["/", "템플릿 고르기", LayoutGrid],
+      ["/company-kit", "회사 표준 UI · AI 개발", Boxes],
       ["/my-templates", "내 템플릿", Bookmark],
       ["/setup", "개발 환경 · 설치", Terminal],
       ["/docs", "사용 가이드", BookOpen],
@@ -873,6 +875,7 @@ export default function App() {
               element={<ComponentLibrary playground />}
             />
             <Route path="/generator" element={<GeneratorPage />} />
+            <Route path="/company-kit" element={<CompanyKit />} />
             <Route path="/setup" element={<SetupGuide />} />
             <Route path="/docs" element={<Docs />} />
             <Route

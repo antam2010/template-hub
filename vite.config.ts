@@ -20,6 +20,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
+      "@hub/screen-patterns": resolve("packages/screen-patterns/src/index.tsx"),
       "@hub/ui-core": resolve("packages/ui-core/src/index.tsx"),
       "@hub/patterns": resolve("packages/patterns/src/index.ts"),
       "@hub/project-generator": resolve(

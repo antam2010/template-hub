@@ -1,0 +1,446 @@
+{
+  "schemaVersion": 1,
+  "kitVersion": "0.1.0",
+  "approval": "reference implementation; company approval required",
+  "components": [
+    {
+      "id": "Button",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "승인된 기본·외곽선·위험 액션 버튼",
+      "import": "import { Button } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/index.tsx",
+      "contract": {
+        "children": "ReactNode",
+        "variant": "default | outline | ghost | destructive",
+        "size": "default | sm | lg",
+        "loading?": "boolean",
+        "disabled?": "boolean",
+        "onClick?": "MouseEventHandler"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Input",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "표준 입력 필드. label과 함께 사용",
+      "import": "import { Input } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/index.tsx",
+      "contract": {
+        "...": "React.InputHTMLAttributes<HTMLInputElement>"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Select",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Select 공통 컴포넌트",
+      "import": "import { Select } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/index.tsx",
+      "contract": {
+        "options": "string[]",
+        "...": "React.SelectHTMLAttributes<HTMLSelectElement>"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Checkbox",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Checkbox 공통 컴포넌트",
+      "import": "import { Checkbox } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/composites.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/composites.tsx의 Checkbox 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Modal",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Modal 공통 컴포넌트",
+      "import": "import { Modal } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/composites.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/composites.tsx의 Modal 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Table",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "제네릭 데이터 목록. 정렬·조회는 소비자가 구현",
+      "import": "import { Table } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/pattern-components.tsx",
+      "contract": {
+        "rows": "T[]",
+        "columns": "Column<T>[]",
+        "getKey": "(row:T)=>string|number",
+        "emptyText?": "string"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Pagination",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Pagination 공통 컴포넌트",
+      "import": "import { Pagination } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/composites.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/composites.tsx의 Pagination 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Filter",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Filter 공통 컴포넌트",
+      "import": "import { Filter } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/pattern-components.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/pattern-components.tsx의 Filter 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Search",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Search 공통 컴포넌트",
+      "import": "import { Search } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/pattern-components.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/pattern-components.tsx의 Search 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Sidebar",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Sidebar 공통 컴포넌트",
+      "import": "import { Sidebar } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/pattern-components.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/pattern-components.tsx의 Sidebar 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Navbar",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Navbar 공통 컴포넌트",
+      "import": "import { Navbar } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/pattern-components.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/pattern-components.tsx의 Navbar 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Tabs",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Tabs 공통 컴포넌트",
+      "import": "import { Tabs } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/composites.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/composites.tsx의 Tabs 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Breadcrumb",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Breadcrumb 공통 컴포넌트",
+      "import": "import { Breadcrumb } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/pattern-components.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/pattern-components.tsx의 Breadcrumb 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Toast",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Toast 공통 컴포넌트",
+      "import": "import { Toast } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/composites.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/composites.tsx의 Toast 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Alert",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Alert 공통 컴포넌트",
+      "import": "import { Alert } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/index.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/index.tsx의 Alert 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Badge",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Badge 공통 컴포넌트",
+      "import": "import { Badge } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/index.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/index.tsx의 Badge 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Loading",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Loading 공통 컴포넌트",
+      "import": "import { Loading } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/index.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/index.tsx의 Loading 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Card",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Card 공통 컴포넌트",
+      "import": "import { Card } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/index.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/index.tsx의 Card 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Chart",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Chart 공통 컴포넌트",
+      "import": "import { Chart } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/pattern-components.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/pattern-components.tsx의 Chart 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "Form",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "Form 공통 컴포넌트",
+      "import": "import { Form } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/pattern-components.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/pattern-components.tsx의 Form 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "FileUpload",
+      "package": "@hub/ui-core",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "FileUpload 공통 컴포넌트",
+      "import": "import { FileUpload } from '@hub/ui-core';",
+      "source": "packages/ui-core/src/composites.tsx",
+      "contract": {
+        "reference": "packages/ui-core/src/composites.tsx의 FileUpload 선언 및 배포 .d.ts가 전체 타입 계약"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "ListPage",
+      "package": "@hub/screen-patterns",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "검색·상태 필터·목록·페이지 이동을 조합한 제어형 업무 화면",
+      "import": "import { ListPage } from '@hub/screen-patterns';",
+      "source": "packages/screen-patterns/src/index.tsx",
+      "contract": {
+        "title": "string",
+        "rows": "T[] (current page)",
+        "columns": "Column<T>[]",
+        "getKey": "(row:T)=>string|number",
+        "query": "string",
+        "onQueryChange": "(value:string)=>void",
+        "status": "string",
+        "statuses": "string[]",
+        "onStatusChange": "(value:string)=>void",
+        "page": "number (1 based)",
+        "totalPages": "number",
+        "onPageChange": "(page:number)=>void",
+        "onCreate": "()=>void",
+        "loading?": "boolean",
+        "error?": "string",
+        "onRetry?": "()=>void"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    },
+    {
+      "id": "FormDialog",
+      "package": "@hub/screen-patterns",
+      "version": "0.1.0",
+      "status": "reference",
+      "description": "등록·수정 폼의 유효성 검사와 모달 포커스 관리",
+      "import": "import { FormDialog } from '@hub/screen-patterns';",
+      "source": "packages/screen-patterns/src/index.tsx",
+      "contract": {
+        "open": "boolean",
+        "onOpenChange": "(open:boolean)=>void",
+        "title": "string",
+        "children": "ReactNode",
+        "onSubmit": "()=>void|Promise<void>",
+        "submitting?": "boolean",
+        "error?": "string"
+      },
+      "rules": [
+        "원본 수정은 공통 패키지에서 수행",
+        "색상·여백 직접 덮어쓰기 금지",
+        "기능과 접근성 검증 후 회사 승인 필요"
+      ]
+    }
+  ],
+  "recipes": [
+    {
+      "id": "members-list",
+      "name": "회원 관리",
+      "packages": ["@hub/ui-core", "@hub/screen-patterns"],
+      "components": [
+        "ListPage",
+        "FormDialog",
+        "Button",
+        "Input",
+        "Select",
+        "Badge"
+      ],
+      "source": "examples/company-members/src/App.tsx",
+      "dataOwnership": "consumer",
+      "mockPersistence": "memory; refresh resets"
+    }
+  ]
+}

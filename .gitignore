@@ -8,3 +8,6 @@ test-results/
 
 .env.local
 .env.*.local
+
+public/distribution/
+**/src/.package-*
